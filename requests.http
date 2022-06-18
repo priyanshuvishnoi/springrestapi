@@ -1,0 +1,36 @@
+@host=http://localhost:9000/api/v1
+@employeeApi = {{host}}/employees
+
+### Get All Employees
+GET  {{employeeApi}} HTTP/1.1
+
+### Get Employee by id
+GET {{employeeApi}}/2 HTTP/1.1
+
+### Delete Employee by id
+DELETE {{employeeApi}}?id=5 HTTP/1.1
+
+### Create New Employee
+POST {{employeeApi}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Ram",
+  "age": 23,
+  "location": "New Delhi",
+  "email": "lucky",
+  "department": "IT"
+}
+
+### Update Employee
+PATCH  {{employeeApi}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 6,
+  "name": "Lucky Vishnoi"
+}
+
+###
+GET  {{employeeApi}}/version HTTP/1.1
+
