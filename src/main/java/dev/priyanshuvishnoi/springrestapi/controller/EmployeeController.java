@@ -4,6 +4,8 @@ import dev.priyanshuvishnoi.springrestapi.models.Employee;
 import dev.priyanshuvishnoi.springrestapi.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -42,8 +44,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee saveEmployee(@Valid @RequestBody Employee employee) {
-        return eService.saveEmployee(employee);
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee) {
+        return new ResponseEntity<>(eService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
     @PatchMapping()
@@ -52,7 +54,8 @@ public class EmployeeController {
     }
 
     @DeleteMapping
-    public void deleteEmployee(@RequestParam Long id) {
+    public ResponseEntity<HttpStatus> deleteEmployee(@RequestParam Long id) {
         eService.deleteEmployee(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
