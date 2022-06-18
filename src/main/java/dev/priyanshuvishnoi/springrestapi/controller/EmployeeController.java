@@ -34,8 +34,8 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> getEmployees() {
-        return eService.getEmployees();
+    public List<Employee> getEmployees(@RequestParam Integer page, @RequestParam Integer size) {
+        return eService.getEmployees(page, size);
     }
 
     @GetMapping("/{id}")
@@ -57,5 +57,20 @@ public class EmployeeController {
     public ResponseEntity<HttpStatus> deleteEmployee(@RequestParam Long id) {
         eService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/filterByName")
+    public List<Employee> getEmployeesByName(@RequestParam String name) {
+        return eService.getEmployeesByName(name);
+    }
+
+    @GetMapping("/filterByNameAndLocation")
+    public List<Employee> getEmployeesByNameAndLocation(@RequestParam String name, @RequestParam String location) {
+        return eService.getEmployeesByNameAndLocation(name, location);
+    }
+
+    @GetMapping("/filterByNameContaining")
+    public List<Employee> getEmployeesByNameAndLocation(@RequestParam String keyword) {
+        return eService.getEmployeesByNameContaining(keyword);
     }
 }

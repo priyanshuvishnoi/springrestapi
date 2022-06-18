@@ -2,7 +2,7 @@
 @employeeApi = {{host}}/employees
 
 ### Get All Employees
-GET  {{employeeApi}} HTTP/1.1
+GET  {{employeeApi}}?page=0&size=10 HTTP/1.1
 
 ### Get Employee by id
 GET {{employeeApi}}/2 HTTP/1.1
@@ -33,4 +33,14 @@ Content-Type: application/json
 
 ###
 GET  {{employeeApi}}/version HTTP/1.1
+
+### Get Employees By Name
+GET {{employeeApi}}/filterByName?name=ram HTTP/1.1
+
+
+### Get Employees By Name And Location
+GET {{employeeApi}}/filterByNameAndLocation?name=priyanshu&location=new delhi HTTP/1.1
+
+### Get Employees By Name Containing Keyword
+GET {{employeeApi}}/filterByNameContaining?keyword=u HTTP/1.1
 

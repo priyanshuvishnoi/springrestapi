@@ -4,6 +4,8 @@ import dev.priyanshuvishnoi.springrestapi.exceptions.NotFoundException;
 import dev.priyanshuvishnoi.springrestapi.models.Employee;
 import dev.priyanshuvishnoi.springrestapi.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +24,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<Employee> getEmployees() {
-        return employeeRepo.findAll();
+    public List<Employee> getEmployees(Integer page, Integer size) {
+        var pages = PageRequest.of(page, size, Sort.Direction.DESC, "id");
+        return employeeRepo.findAll(pages).getContent();
     }
 
     @Override
@@ -69,5 +72,21 @@ public class EmployeeServiceImpl implements EmployeeService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Employee> getEmployeesByName(String name) {
+        return employeeRepo.findAllByNameContainingIgnoreCase(name);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByNameAndLocation(String name, String location) {
+        return employeeRepo.findAllByNameContainingIgnoreCaseAndLocationContainingIgnoreCase(name, location);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByNameContaining(String keyword) {
+        var sort = Sort.by(Sort.Direction.DESC, "id");
+        return employeeRepo.findAllByNameIsContainingIgnoreCase(keyword, sort);
     }
 }
