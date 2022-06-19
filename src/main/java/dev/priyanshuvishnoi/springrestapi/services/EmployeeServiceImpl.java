@@ -89,4 +89,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         var sort = Sort.by(Sort.Direction.DESC, "id");
         return employeeRepo.findAllByNameIsContainingIgnoreCase(keyword, sort);
     }
+
+    @Override
+    public List<Employee> getEmployeesByNameOrLocation(String name, String location) {
+        return employeeRepo.getEmployeesByNameAndLocation(name, location);
+    }
+
+    @Override
+    public Integer deleteByEmployeeName(String name) {
+        return employeeRepo.deleteByEmployeeName(name);
+    }
 }

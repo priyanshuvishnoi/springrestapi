@@ -1,5 +1,6 @@
 package dev.priyanshuvishnoi.springrestapi.models;
 
+import dev.priyanshuvishnoi.springrestapi.requests.EmployeeRequest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,8 +33,9 @@ public class Employee {
     @Email
     private String email;
 
-    @NotBlank(message = "Department should not be null!")
-    private String department;
+    @JoinColumn(name = "id")
+    @OneToOne
+    private Department department;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -42,4 +44,11 @@ public class Employee {
     @UpdateTimestamp
     @Column(nullable = false)
     private Date updatedAt;
+
+    public Employee(EmployeeRequest request) {
+        this.name = request.getName();
+        this.age = request.getAge();
+        this.email = request.getEmail();
+        this.location = request.getLocation();
+    }
 }

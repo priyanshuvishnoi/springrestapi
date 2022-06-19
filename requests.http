@@ -44,3 +44,8 @@ GET {{employeeApi}}/filterByNameAndLocation?name=priyanshu&location=new delhi HT
 ### Get Employees By Name Containing Keyword
 GET {{employeeApi}}/filterByNameContaining?keyword=u HTTP/1.1
 
+### Get Employees By Name or Location
+GET {{employeeApi}}/priyanshu/amroha HTTP/1.1
+
+### Delete Employee by name
+DELETE {{employeeApi}}/delete/jack HTTP/1.1
